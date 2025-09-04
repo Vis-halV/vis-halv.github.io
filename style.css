@@ -1,3 +1,5 @@
+/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap'); */
+
 @font-face {
     font-family: 'DepartureMono';
     src: url('./assets/fonts/DepartureMono-Regular.woff2') format('woff2'),
@@ -25,6 +27,7 @@
 .container { display: flex; flex-direction: column; padding: 0 5%; }
 .jet-mono-regular { font-family: "JetBrains Mono"; font-size: 16px; line-height: 24px; }
 .flex { display: flex; align-items: center; justify-content: center; flex-direction: column;}
+hr { margin: 0.5rem 0 20px 0; opacity: 50%; }
 
 /* Hero Section */
 
@@ -41,6 +44,26 @@
 
 .hero-sub p { width: 70%; float: left; color: #fff; opacity: 75%;}
 .hero-sub h3 { width: 30%; float: inline-end; text-align: end; color: #fff;}
+
+/* Featured Projects */
+
+.featured-projects {
+  margin-top: 4rem;
+}
+
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.project { display: flex; flex-direction: column; margin-top: 3rem;}
+.project img { width: 100%; object-fit: cover; overflow: hidden; border-radius: 0.5rem; } 
+.project1 { height: 95vh; width: 100%; }
+.project12 { width: 50%; }
+
+#proj-3 img { height: 95vh; }
+#proj-2 img { height: 60vh; }
+#proj-1 img { height: 75vh; }
+
+.featured-projects p, i { font-size: 18px; line-height: 21.6px; color: #fff; }
+.pro-p-regular { margin-top: 2rem; }
+.pro-p-light { color: #fff; opacity: 75%; margin-top: 1rem;} 
 
 /* Footer Section */
 
