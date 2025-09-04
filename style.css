@@ -26,6 +26,22 @@
 .jet-mono-regular { font-family: "JetBrains Mono"; font-size: 16px; line-height: 24px; }
 .flex { display: flex; align-items: center; justify-content: center; flex-direction: column;}
 
+/* Hero Section */
+
+.hero-main {
+  width: 70%; 
+  margin: 180px 0 48px 0;
+  background-color: #0c0c0c; color: #fff;
+}
+
+.hero-main p { 
+  color: #ffbe66; font-family: "DepartureMono";
+  font-size: 36px; line-height: 43.2px;
+}
+
+.hero-sub p { width: 70%; float: left; color: #fff; opacity: 75%;}
+.hero-sub h3 { width: 30%; float: inline-end; text-align: end; color: #fff;}
+
 /* Footer Section */
 
 footer { margin-top: 8rem; background-color: #ffbe66; }
