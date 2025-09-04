@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'DepartureMono';
+    src: url('./assets/fonts/DepartureMono-Regular.woff2') format('woff2'),
+         url('./assets/fonts/DepartureMono-Regular.woff') format('woff'),
+         url('./assets/fonts/DepartureMono-Regular.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./assets/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  margin: 0; padding: 0;
+  text-transform: uppercase; 
+  background-color: #0c0c0c; color: #ffbe66;
+}
+
+.container { display: flex; flex-direction: column; padding: 0 5%; }
+.jet-mono-regular { font-family: "JetBrains Mono"; font-size: 16px; line-height: 24px; }
+.flex { display: flex; align-items: center; justify-content: center; flex-direction: column;}
+
+/* Footer Section */
+
+footer { margin-top: 8rem; background-color: #ffbe66; }
+footer p { margin-bottom: 0.5rem; text-transform: none; }
+
+.foot-main {
+  display: flex; flex-direction: row; justify-content: space-between;
+  align-items: flex-start; padding: 3rem 5%+2rem;
+  background: #ffbe66;
+}
+
+.foot-div { width: 30%; background-color: transparent; padding-left: 1rem;}
+
+.foot-div h3 {
+  margin-bottom: 1rem; 
+  background-color: transparent; color: #B16F00;
+  font-size: 16px; line-height: 19.2px;
+}
+
+.foot-div p, .foot-div li, .foot-div a, .foot-div ul, .foot-div span {
+  background-color: transparent; color: #000;
+  list-style: none;
+}
+
+.foot-div li { margin-bottom: 0.5rem; }
+
+#socials { align-items: flex-start; padding-left: 8rem;}
+
+#copy-logo {
+  cursor: pointer;
+  padding: 4px; border-radius: 4px;
+  background-color: #fff; color: #ffbe66;
+}
+
+.foot-note { height: 70px; }
+#foot-note { color: #fff; opacity: 75%; }
