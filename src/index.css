@@ -40,28 +40,26 @@
 
 /* Typography Utilities */
 
-@layer base {
-  body {
-    font-family: "Inter", system-ui, sans-serif;
-    font-size: clamp(15px, 1.2vw, 17px);
-    line-height: 1.6;
-  }
-}
-
 @layer utilities {
-  /* Regular mono text */
   .jet-mono-regular {
     font-family: "JetBrains Mono", monospace;
-    font-size: clamp(14px, 1.1vw, 16px);
+    font-size: clamp(16px, 1vw, 15px);
     line-height: 1.5;
     font-weight: 500;
   }
 
-  /* Display  */
+  .jet-mono-bold {
+    font-family: "JetBrains Mono", monospace;
+    font-size: clamp(20px, 0.95vw, 14px);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+
   .departure-mono {
     font-family: "DepartureMono", monospace;
     color: #ffbe66;
-    font-size: clamp(24px, 4vw, 36px);
+    font-size: clamp(22px, 3.8vw, 36px);
     line-height: 1.2;
   }
 }
