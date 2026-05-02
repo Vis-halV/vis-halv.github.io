@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/useTheme";
 
 type Section = {
   label: string;
@@ -16,25 +17,8 @@ const sections: Section[] = [
 ];
 
 export default function Header() {
-  const [dark, setDark] = useState(false);
-  const [active, setActive] = useState("");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "dark") setDark(true);
-  }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (dark) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [dark]);
+  const { dark, setDark } = useTheme();
+  const [active, setActive] = useState<string>("");
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -44,23 +28,29 @@ export default function Header() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      sections.forEach((section) => {
-        const el = document.getElementById(section.id);
-        if (!el) return;
+    const observers: IntersectionObserver[] = [];
 
-        const rect = el.getBoundingClientRect();
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (!el) return;
 
-        if (rect.top <= 120 && rect.bottom >= 120) {
-          setActive(section.id);
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActive(section.id);
+          }
+        },
+        {
+          rootMargin: "-40% 0px -40% 0px",
+          threshold: 0,
         }
-      });
-    };
+      );
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); 
+      observer.observe(el);
+      observers.push(observer);
+    });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   return (
@@ -76,11 +66,9 @@ export default function Header() {
 
       <div className="fixed top-6 right-6 z-50 p-2 rounded-full backdrop-blur-md">
         <button
-          onClick={() => setDark(!dark)}
+          onClick={() => setDark((d) => !d)}
           className={`w-4 h-4 rounded-full transition-all duration-300 hover:scale-110 ${
-            dark
-              ? "bg-foreground"
-              : "bg-foreground"
+            dark ? "bg-white" : "bg-black"
           }`}
         />
       </div>
@@ -93,19 +81,19 @@ export default function Header() {
             className="group flex items-center gap-3"
           >
             <span
-                className={`block h-[1px] transition-all duration-300 ${
-                    active === section.id
-                    ? "w-10 bg-foreground opacity-100"
-                    : "w-6 bg-foreground opacity-40 group-hover:opacity-100 group-hover:w-10"
-                }`}
+              className={`block h-[1px] transition-all duration-300 ${
+                active === section.id
+                  ? "w-10 bg-foreground opacity-100"
+                  : "w-6 bg-foreground opacity-40 group-hover:opacity-100 group-hover:w-10"
+              }`}
             />
 
             <span
-                className={`text-xs transition-colors duration-300 ${
-                    active === section.id
-                    ? "opacity-100 text-foreground"
-                    : "opacity-0 group-hover:opacity-100 text-foreground/70"
-                }`}
+              className={`text-xs transition-colors duration-300 ${
+                active === section.id
+                  ? "opacity-100 text-foreground"
+                  : "opacity-0 group-hover:opacity-100 text-foreground/70"
+              }`}
             >
               {section.label}
             </span>
@@ -114,7 +102,7 @@ export default function Header() {
       </div>
 
       <div className="hidden fixed right-8 top-1/2 -translate-y-1/2 z-50 md:flex flex-col items-center gap-8">
-        
+
         <Button
           asChild
           variant="ghost"
@@ -128,27 +116,30 @@ export default function Header() {
             rel="noopener noreferrer"
             className="text-[10px] tracking-[0.35em]
                       px-[2px] py-2
-                      text-foreground/50 hover:text-foreground
+                      text-foreground/50 hover:text-background hover:bg-foreground 
                       transition-all duration-300"
             style={{ writingMode: "vertical-rl", textOrientation: "upright" }}
           >
-            X
+            <span className="invisible">XX</span>
+            X.com
+            <span className="invisible">XX</span>
           </a>
         </Button>
 
         <Button
           asChild
-          className="p-0 h-auto rounded-none 
-                    bg-foreground text-background 
-                    hover:bg-foreground/80 shadow-none"
+          className="p-0 h-auto rounded-none
+                  bg-foreground text-background
+                  hover:bg-background shadow-none
+                  hover:text-foreground transition-all duration-300"
         >
           <a
             href="https://linkedin.com/in/vis-halv"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[10px] tracking-[0.35em]
-                      px-[2px] py-2
-                      transition-all duration-300"
+                    px-[2px] py-2
+                    transition-all duration-300"
             style={{ writingMode: "vertical-rl", textOrientation: "upright" }}
           >
             LINKEDIN
